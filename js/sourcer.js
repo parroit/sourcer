@@ -19,6 +19,9 @@ $(document).ready(function(){
 
     folderCtrl.events.on('fileAction',function(file){
         var documentCtrl = new DocumentCtrl(file.path);
+        documentCtrl.open(function() {
+            documentView.setDocumentCtrl(documentCtrl);
+        });
     });
     folderCtrl.changeFolder(process.cwd(),function(){
         CollapsibleLists.applyTo($folder[0]);

@@ -17,40 +17,46 @@ describe('FolderCtrl', function () {
 
     describe("changeFolder", function () {
         it("should fill folderTree", function (done) {
-            folderCtrl.changeFolder("test/test-tree",function(){
+            folderCtrl.changeFolder("test/test-tree", function () {
                 expect(folderCtrl.folderTree).to.be.deep.equal({
-                    name:"test-tree",
-                    path:"test/test-tree",
-                    children:[
+                    name: "test-tree",
+                    path: "test/test-tree",
+                    children: [
                         {
-                            name:"c",
-                            path:"test/test-tree/c",
-                            children:[],
+                            name: "c",
+                            path: "test/test-tree/c",
+                            "children": [
+                                {
+                                    "name": ".placeholder",
+                                    "path": "test/test-tree/c/.placeholder",
+                                    "type": "file"
+                                }
+                            ],
                             type: "directory"
                         },
                         {
-                            name:"a",
-                            path:"test/test-tree/a",
-                            children:[
+                            name: "a",
+                            path: "test/test-tree/a",
+                            children: [
                                 {
-                                    name:"afile.txt",
-                                    path:"test/test-tree/a/afile.txt",
+                                    name: "afile.txt",
+                                    path: "test/test-tree/a/afile.txt",
                                     type: "file"
 
                                 },
                                 {
-                                    name:"b",
-                                    path:"test/test-tree/a/b",
-                                    children:[
+                                    name: "b",
+                                    path: "test/test-tree/a/b",
+                                    children: [
                                         {
-                                            name:"afile.txt",
-                                            path:"test/test-tree/a/b/afile.txt",
+                                            name: "afile.txt",
+                                            path: "test/test-tree/a/b/afile.txt",
                                             type: "file"
 
                                         },
                                         {
-                                            name:"bfile.txt",
-                                            path:"test/test-tree/a/b/bfile.txt",
+                                            name: "bfile.txt",
+                                            path: "test/test-tree/a/b/bfile.txt",
                                             type: "file"
 
                                         }

@@ -8,4 +8,6 @@ module.exports = DocumentView;
 
 DocumentView.prototype.setDocumentCtrl = function(ctrl){
     this.ctrl = ctrl;
+    this.editor.setValue(ctrl.content);
+
 };
