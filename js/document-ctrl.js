@@ -68,7 +68,7 @@ DocumentCtrl.prototype.save = function(done){
 DocumentCtrl.prototype.close = function(){
 
     if (this.dirty){
-        this.events.emit('onDirtyClosing');
+        this.events.emit('dirtyClosing');
     } else {
 
         this.status = status.closed;

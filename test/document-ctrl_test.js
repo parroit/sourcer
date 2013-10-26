@@ -134,7 +134,7 @@ describe('DocumentCtrl', function () {
 
                 before(function(done){
                     ctrl.setDirty();
-                    ctrl.events.once('onDirtyClosing',function(){
+                    ctrl.events.once('dirtyClosing',function(){
                         called=true;
                         done();
                     });
@@ -148,7 +148,7 @@ describe('DocumentCtrl', function () {
                 });
 
 
-                it("raise onDirtyClosing", function () {
+                it("raise dirtyClosing", function () {
                     expect(called).to.be.true;
                 });
 
@@ -175,15 +175,15 @@ describe('DocumentCtrl', function () {
                         documentClosedCalled=true;
                         done();
                     });
-                    ctrl.events.once('onDirtyClosing', setCalled);
+                    ctrl.events.once('dirtyClosing', setCalled);
 
                     ctrl.close();
-                    ctrl.events.removeListener('onDirtyClosing', setCalled);
+                    ctrl.events.removeListener('dirtyClosing', setCalled);
 
                 });
 
 
-                it("don't raise onDirtyClosing", function () {
+                it("don't raise dirtyClosing", function () {
                     expect(called).to.be.false;
                 });
 

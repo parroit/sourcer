@@ -80,6 +80,7 @@ describe('AppCtrl', function () {
                 expect(appCtrl.activeDocument).to.be.equal(appCtrl.documentCtrls[0]);
             });
 
+
             describe("on document closing",function(){
                 before(function(done){
                     appCtrl.events.once('documentOpened',function(){
@@ -103,6 +104,36 @@ describe('AppCtrl', function () {
 
                 it("should reset activeDocument if no document remain", function () {
                     expect(appCtrl.activeDocument).to.be.undefined;
+                });
+            });
+
+
+            describe("on dirty document closing",function(){
+                var called = null;
+                before(function(done){
+                    appCtrl.events.once('saveConfirm',function(doc){
+                        called=doc;
+                    });
+                    appCtrl.events.once('documentOpened',function(){
+                        appCtrl.activeDocument.setDirty();
+                        appCtrl.activeDocument.close();
+                        done();
+                    });
+                    appCtrl.openDocument("test-doc/doc1.txt");
+
+                });
+
+                it("should not remove document controller", function () {
+                    expect(appCtrl.documentCtrls.length).to.be.equal(1);
+                });
+
+                it("should not change activeDocument", function () {
+                    expect(appCtrl.activeDocument.filepath).to.be.equal("test-doc/doc1.txt");
+
+                });
+
+                it("should emit ask saveConfirm", function () {
+                    expect(called.filepath).to.be.equal("test-doc/doc1.txt");
                 });
             });
 
