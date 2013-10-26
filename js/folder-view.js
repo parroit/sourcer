@@ -14,6 +14,8 @@ function FolderView(ctrl, elm, $, editor) {
         self.fillTree(ul, ctrl.folderTree, $);
         done && done();
     });
+    self.events.on('fileClicked',ctrl.onFileAction);
+    self.events.on('directoryClicked',ctrl.onDirectoryAction);
 }
 
 module.exports = FolderView;

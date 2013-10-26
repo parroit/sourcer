@@ -1,12 +1,23 @@
-
+var _ = require("lodash");
 var fs = require('fs');
 var path = require('path');
 
 function FolderCtrl() {
+    this.onFileAction = function(file){
+
+    };
+
+    this.onDirectoryAction = function(directory){
+
+    };
+
+    _.bind(this.onFileAction,this);
+    _.bind(this.onDirectoryAction,this);
 
 }
 
 module.exports = new FolderCtrl();
+
 
 FolderCtrl.prototype.onTreeRead = function(handler){
     if (this.folderTree)
