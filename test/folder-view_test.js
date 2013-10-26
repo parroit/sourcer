@@ -19,7 +19,10 @@ describe('FolderView', function () {
     var ctrl = {
         onTreeRead: function(handler){
             this.handler = handler;
-        }
+        },
+        onFileAction : function(file){},
+        onDirectoryAction : function(directory){}
+
     };
     var elm = $.load("<div></div>")("div");
     var view = new FolderView(ctrl, elm,$);

@@ -1,16 +1,18 @@
 var _ = require("lodash");
 var fs = require('fs');
 var path = require('path');
+var events = require('events');
 
 function FolderCtrl() {
     this.onFileAction = function(file){
-
+        this.events.emit('fileAction',file);
     };
 
     this.onDirectoryAction = function(directory){
-
+        this.events.emit('directoryfileAction',directory);
     };
 
+    this.events = new events.EventEmitter();
     _.bind(this.onFileAction,this);
     _.bind(this.onDirectoryAction,this);
 
