@@ -3,6 +3,7 @@ var DocumentView = require('./js/document-view');
 var DocumentCtrl = require('./js/document-ctrl');
 var folderCtrl = require('./js/folder-ctrl');
 
+
 $(document).ready(function(){
 
     var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {

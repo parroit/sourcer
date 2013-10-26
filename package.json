@@ -37,7 +37,8 @@
   "dependencies": {
     "lodash": "~2.2.1",
     "cheerio": "~0.12.3",
-    "node-uuid": "~1.4.1"
+    "node-uuid": "~1.4.1",
+    "codemirror": "~3.19.0"
   },
   "keywords": [
     "IDE",
