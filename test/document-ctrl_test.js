@@ -10,7 +10,12 @@ require('chai').should();
 function DocMock(value){
     this.value = value;
 }
+DocMock.prototype.on = function(){
 
+};
+DocMock.prototype.off = function(){
+
+};
 DocMock.prototype.setValue = function(value){
     this.value = value;
 };

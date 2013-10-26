@@ -16,9 +16,7 @@ DocumentView.prototype.setDocumentCtrl = function(ctrl){
     self.ctrl = ctrl;
     self.editor.swapDoc(ctrl.doc);
 
-    self.editor.on('change',function(){
-        ctrl.setDirty();
-    });
+
 
     var anchor = $("<a>");
     anchor.attr("id",uuid.v1());
