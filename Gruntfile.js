@@ -17,6 +17,6 @@ module.exports = function (grunt) {
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-mocha-test');
 
-    grunt.registerTask('test', 'mochaTest');
+    grunt.registerTask('default', 'mochaTest');
 
 };
