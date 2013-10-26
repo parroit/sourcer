@@ -1,5 +1,5 @@
 var events = require("events");
-
+var uuid = require('node-uuid');
 function DocumentView(editor, tabsElm, $){
     this.events = new events.EventEmitter();
     this.editor = editor;
@@ -21,17 +21,19 @@ DocumentView.prototype.setDocumentCtrl = function(ctrl){
     });
 
     var anchor = $("<a>");
+    anchor.attr("id",uuid.v1());
     anchor.attr("href", "");
     anchor.html(ctrl.caption);
 
     var tab = $("<li>");
     tab.addClass("uk-active");
     tab.attr("data-uk-tooltip","{pos:'bottom-left'}");
-    tab.html(anchor);
+    tab.append(anchor);
 
     self.tabsElm.html(tab);
+    self.anchor = $("#" + anchor.attr("id"));
+    self.ctrl.events.on('captionChanged',function(){
 
-    self.ctrl.on('captionChanged',function(){
-        anchor.html(ctrl.caption);
+        self.anchor.html(ctrl.caption);
     });
 };
