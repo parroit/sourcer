@@ -1,6 +1,7 @@
 'use strict';
 
-var folderCtrl = require('../js/folder-ctrl');
+var FolderCtrl = require('../js/folder-ctrl');
+var folderCtrl = new FolderCtrl();
 var expect = require('chai').expect;
 
 var _ = require('lodash');

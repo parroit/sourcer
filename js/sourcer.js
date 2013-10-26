@@ -1,31 +1,8 @@
-var FolderView = require('./js/folder-view');
-var DocumentView = require('./js/document-view');
-
-var folderCtrl = require('./js/folder-ctrl');
 
 
-/////////////////////////////////////////////
-var events = require("events");
-var DocumentCtrl = require('./js/document-ctrl');
+var AppCtrl = require("./js/app-ctrl");
 
-function AppCtrl(){
-    this.events= new events.EventEmitter();
-    self.documents = [];
-}
-
-AppCtrl.prototype.openDocument= function(filepath) {
-    var self = this;
-    if (!filepath){
-        self.events.emit("requireOpenFilePath");
-    } else {
-        var documentCtrl = new DocumentCtrl(file.path,CodeMirror.Doc);
-        documentCtrl.open(function() {
-            self.events.emit("documentOpened",documentCtrl);
-
-        });
-    }
-};
-/////////////////////////////////////////////
+var appCtrl = new AppCtrl(CodeMirror.Doc);
 
 var gui = require('nw.gui');
 
@@ -43,7 +20,7 @@ function setupMenu() {
     file.append(new gui.MenuItem({
         label: '&Open',
         click: function() {
-           alert("Open");
+           appCtrl.openDocument();
         }
     }));
 
@@ -55,29 +32,45 @@ function setupMenu() {
 
 }
 
-setupMenu();
+var FolderView = require('./js/folder-view');
+var DocumentView = require('./js/document-view');
+
 
 $(document).ready(function(){
+
+    appCtrl.events.on("documentOpened",function(ctrl){
+        documentView.setDocumentCtrl(ctrl);
+    });
+
+    appCtrl.events.on("requireOpenFilePath",function(ctrl){
+        var chooser = $("#fileDialog");
+        chooser.change(function(evt) {
+            var filepath = $(this).val();
+            alert(filepath);
+            appCtrl.openDocument(filepath);
+        });
+
+        chooser.trigger('click');
+    });
+
+    var $folder = $("#folder-tree");
+    appCtrl.events.on("folderTreeChanged",function(){
+        CollapsibleLists.applyTo($folder[0]);
+    });
 
     var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
         lineNumbers: true,
         mode: "text/plain"
     });
+
     var documentView = new DocumentView(editor,$("#editor-container").find("ul"),$);
 
-    var $folder = $("#folder-tree");
-    var folderView = new FolderView(folderCtrl, $folder,$,editor);
+    var folderView = new FolderView(appCtrl.folderCtrl, $folder,$,editor);
+
 
     $('body').split({orientation:'vertical', limit:100});
 
-    folderCtrl.events.on('fileAction',function(file){
-        var documentCtrl = new DocumentCtrl(file.path,CodeMirror.Doc);
-        documentCtrl.open(function() {
-            documentView.setDocumentCtrl(documentCtrl);
-        });
-    });
-    folderCtrl.changeFolder(process.cwd(),function(){
-        CollapsibleLists.applyTo($folder[0]);
-    });
+    setupMenu();
 
+    appCtrl.changeFolder(process.cwd());
 });

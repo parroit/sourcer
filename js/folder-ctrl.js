@@ -19,7 +19,7 @@ function FolderCtrl() {
 
 }
 
-module.exports = new FolderCtrl();
+module.exports = FolderCtrl;
 
 
 FolderCtrl.prototype.onTreeRead = function (handler) {
