@@ -75,6 +75,7 @@ DocumentCtrl.prototype.close = function(){
         this.dirty=false;
         this.doc.off('change',this.setDirty);
         this.doc=undefined;
+        this.events.emit('documentClosed');
     }
 
 

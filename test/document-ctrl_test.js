@@ -145,13 +145,18 @@ describe('DocumentCtrl', function () {
         describe("close", function () {
             describe("when dirty", function () {
                 var called =false;
-
+                var documentClosedCalled  =false;
 
                 before(function(done){
                     ctrl.setDirty();
                     ctrl.events.once('onDirtyClosing',function(){
                         called=true;
                         done();
+                    });
+
+                    ctrl.events.once('documentClosed',function(){
+                        documentClosedCalled=true;
+
                     });
                     ctrl.close();
 
@@ -165,18 +170,26 @@ describe('DocumentCtrl', function () {
                 it("leave document opened", function () {
                     expect(ctrl.status).to.be.equal("open");
                 });
+
+                it("don't raise documentClosed", function () {
+                    expect(documentClosedCalled).to.be.false;
+                });
             });
 
             describe("when clean", function () {
                 var called =false;
+                var documentClosedCalled  =false;
 
-                before(function(){
+                before(function(done){
                     ctrl.setClean();
 
                     var setCalled = function () {
                         called = true;
                     };
-
+                    ctrl.events.once('documentClosed',function(){
+                        documentClosedCalled=true;
+                        done();
+                    });
                     ctrl.events.once('onDirtyClosing', setCalled);
 
                     ctrl.close();
@@ -191,6 +204,10 @@ describe('DocumentCtrl', function () {
 
                 it("set document closed", function () {
                     expect(ctrl.status).to.be.equal("closed");
+                });
+
+                it("raise documentClosed", function () {
+                    expect(documentClosedCalled).to.be.true;
                 });
 
                 it("clear content", function () {

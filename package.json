@@ -32,7 +32,8 @@
     "grunt-mocha-test": "~0.7.0",
     "chai": "~1.8.0",
     "sinon": "~1.7.3",
-    "sinon-chai": "~2.4.0"
+    "sinon-chai": "~2.4.0",
+    "grunt-node-webkit-builder": "~0.1.11"
   },
   "dependencies": {
     "lodash": "~2.2.1",
