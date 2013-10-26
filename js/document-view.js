@@ -13,25 +13,57 @@ DocumentView.prototype.setDocumentCtrl = function(ctrl){
     var self = this;
     var $ = self.$;
 
+    function onCaptionChanged () {
+
+        self.anchor.html(ctrl.caption);
+    }
+
+    if (self.ctrl){
+        self.ctrl.events.removeListener('captionChanged', onCaptionChanged);
+    }
     self.ctrl = ctrl;
+
+
+    self.ctrl.events.on('captionChanged', onCaptionChanged);
+
     self.editor.swapDoc(ctrl.doc);
 
 
 
-    var anchor = $("<a>");
-    anchor.attr("id",uuid.v1());
-    anchor.attr("href", "");
-    anchor.html(ctrl.caption);
 
-    var tab = $("<li>");
+    var fileId = ctrl.filepath.replace(/[\\\/ :.-_]/g, "X");
+
+
+    var anchor;
+    var tab;
+    tab = $("#"+fileId);
+    if (tab.length){
+        self.anchor = tab.find("a");
+    }   else{
+        anchor = $("<a>");
+
+        anchor.addClass("file-tab");
+        anchor.attr("href", "");
+        anchor.html(ctrl.caption);
+
+
+        tab = $("<li>");
+
+        tab.attr("id",fileId);
+
+        tab.attr("data-uk-tooltip","{pos:'bottom-left'}");
+        tab.append(anchor);
+        self.tabsElm.append(tab);
+        tab = $("#" + tab.attr("id"));
+        self.anchor = tab.find("a");
+
+
+    }
+    self.tabsElm.find(".uk-tab-responsive").remove();
+
+    self.tabsElm.find("li")
+        .removeClass("uk-active");
     tab.addClass("uk-active");
-    tab.attr("data-uk-tooltip","{pos:'bottom-left'}");
-    tab.append(anchor);
 
-    self.tabsElm.html(tab);
-    self.anchor = $("#" + anchor.attr("id"));
-    self.ctrl.events.on('captionChanged',function(){
 
-        self.anchor.html(ctrl.caption);
-    });
 };
