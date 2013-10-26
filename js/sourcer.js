@@ -19,7 +19,7 @@ $(document).ready(function(){
     $('body').split({orientation:'vertical', limit:100});
 
     folderCtrl.events.on('fileAction',function(file){
-        var documentCtrl = new DocumentCtrl(file.path);
+        var documentCtrl = new DocumentCtrl(file.path,CodeMirror.Doc);
         documentCtrl.open(function() {
             documentView.setDocumentCtrl(documentCtrl);
         });

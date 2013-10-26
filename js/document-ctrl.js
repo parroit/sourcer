@@ -2,11 +2,21 @@ var fs = require("fs");
 var path = require("path");
 var events = require("events");
 
-function DocumentCtrl(filepath){
+function DocumentCtrl(filepath,CodeMirrorDoc){
+    this.CodeMirrorDoc=CodeMirrorDoc;
     this.filepath = filepath;
     this.dirty = false;
     this.status = status.closed;
     this.events = new events.EventEmitter();
+
+    Object.defineProperty(this, "content", {
+        get: function() {
+            return (this.doc && this.doc.getValue()) || undefined;
+        },
+        set: function(value) {
+            this.doc && this.doc.setValue(value);
+        }
+    });
 }
 
 var status = {
@@ -29,11 +39,14 @@ DocumentCtrl.prototype.setClean = function(){
     this.events.emit("captionChanged");
 };
 
+
+
 DocumentCtrl.prototype.open = function(done){
     var self = this;
 
     fs.readFile(self.filepath, 'utf8', function (err, data) {
-        self.content= data;
+        self.doc = new self.CodeMirrorDoc(data,"text/plain",0);
+
         self.status = status.opened;
         self.dirty = false;
         self.caption = path.basename(self.filepath);
@@ -59,7 +72,7 @@ DocumentCtrl.prototype.close = function(){
 
         this.status = status.closed;
         this.dirty=false;
-        this.content=undefined;
+        this.doc=undefined;
     }
 
 

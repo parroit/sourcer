@@ -7,6 +7,17 @@ var fs = require('fs');
 var _ = require('lodash');
 require('chai').should();
 
+function DocMock(value){
+    this.value = value;
+}
+
+DocMock.prototype.setValue = function(value){
+    this.value = value;
+};
+DocMock.prototype.getValue = function(value){
+    return this.value;
+};
+
 
 describe('DocumentCtrl', function () {
     describe("module", function () {
@@ -16,7 +27,7 @@ describe('DocumentCtrl', function () {
         });
     });
     var documentPath = "test/test-doc/doc.txt";
-    var ctrl = new DocumentCtrl(documentPath);
+    var ctrl = new DocumentCtrl(documentPath,DocMock);
     describe("Controller", function () {
 
         it("should set filepath", function () {

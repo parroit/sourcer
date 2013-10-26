@@ -14,7 +14,7 @@ DocumentView.prototype.setDocumentCtrl = function(ctrl){
     var $ = self.$;
 
     self.ctrl = ctrl;
-    self.editor.setValue(ctrl.content);
+    self.editor.swapDoc(ctrl.doc);
 
     self.editor.on('change',function(){
         ctrl.setDirty();
