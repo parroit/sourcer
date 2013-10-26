@@ -1,10 +1,13 @@
 var fs = require("fs");
+var _ = require("lodash");
+var events = require("events");
 
 function FolderView(ctrl, elm, $, editor) {
     var self = this;
     self.editor = editor;
     self.ctrl = ctrl;
     self.elm = elm;
+    self.events = new events.EventEmitter();
     self.ctrl.onTreeRead(function (done) {
         var ul = $("<ul>");
         elm.append(ul);
@@ -37,16 +40,11 @@ FolderView.prototype.fillTree = function (elm, root, $) {
             self.fillTree(ul, file, $);
 
         });
-    } else {
-        li.click && li.click(function () {
-            var path = root.path.replace(/\//g, "\\");
-            if (path) {
-
-                fs.readFile(path, 'utf8', function (err, data) {
-                    self.editor.setValue(data);
-                });
-            }
-        });
-
     }
+
+    li.click && li.click(function () {
+        self.events.emit(root.type + 'Clicked',root);
+    });
+
+
 };

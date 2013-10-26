@@ -9,7 +9,8 @@ $(document).ready(function(){
         mode: "text/javascript",
         matchBrackets: true
     });
-    var DocumentCtrl = require();
+    var DocumentCtrl = require('../js/document-ctrl');
+
 
     var $folder = $("#folder-tree");
     var view = new FolderView(folderCtrl, $folder,$,editor);
