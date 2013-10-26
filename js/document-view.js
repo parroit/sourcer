@@ -11,6 +11,7 @@ module.exports = DocumentView;
 
 DocumentView.prototype.setDocumentCtrl = function(ctrl){
     var self = this;
+    var $ = self.$;
 
     self.ctrl = ctrl;
     self.editor.setValue(ctrl.content);

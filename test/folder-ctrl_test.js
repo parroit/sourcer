@@ -14,6 +14,35 @@ describe('FolderCtrl', function () {
 
         });
     });
+    describe("onTreeRead",function(){
+        after(function(){
+            folderCtrl.folderTree = undefined;
+            folderCtrl.onTreeRead(undefined);
+        });
+
+        it("should save handler if folderTree is falsy", function () {
+            function handler(){}
+            folderCtrl.onTreeRead(handler);
+            expect(folderCtrl.onTreeReadHandler).to.be.equal(handler);
+        });
+
+        it("should call handler with done function if folderTree is truthy", function (done) {
+            function handler(next){
+                expect(next).to.be.a('function');
+                done();
+            }
+
+            folderCtrl.folderTree = 1;
+            folderCtrl.onTreeRead(handler);
+
+        });
+        it("shouldn't save handler if folderTree is truthy", function () {
+            folderCtrl.folderTree = 1;
+            folderCtrl.onTreeReadHandler=undefined;
+            folderCtrl.onTreeRead(null);
+            expect(folderCtrl.onTreeReadHandler).to.be.undefined;
+        });
+    });
 
     describe("changeFolder", function () {
         it("should fill folderTree", function (done) {

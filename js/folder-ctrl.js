@@ -5,26 +5,29 @@ var events = require('events');
 
 function FolderCtrl() {
     var self = this;
-    self.onFileAction = function(file){
-        self.events.emit('fileAction',file);
+    self.onFileAction = function (file) {
+        self.events.emit('fileAction', file);
     };
 
-    self.onDirectoryAction = function(directory){
-        self.events.emit('directoryfileAction',directory);
+    self.onDirectoryAction = function (directory) {
+        self.events.emit('directoryfileAction', directory);
     };
 
     self.events = new events.EventEmitter();
-    _.bind(self.onFileAction,this);
-    _.bind(self.onDirectoryAction,this);
+    _.bind(self.onFileAction, this);
+    _.bind(self.onDirectoryAction, this);
 
 }
 
 module.exports = new FolderCtrl();
 
 
-FolderCtrl.prototype.onTreeRead = function(handler){
-    if (this.folderTree)
-        handler(this.folderTree);
+FolderCtrl.prototype.onTreeRead = function (handler) {
+    if (this.folderTree) {
+        var done = function () {
+        };
+        handler && handler(done);
+    }
     else
         this.onTreeReadHandler = handler;
 };
@@ -33,7 +36,6 @@ FolderCtrl.prototype.changeFolder = function (folderPath, done) {
 
     var self = this;
     self.folder = folderPath;
-
 
 
     walk(this.folder, function (err, fileObject) {
@@ -52,7 +54,7 @@ FolderCtrl.prototype.changeFolder = function (folderPath, done) {
         var results = [];
         var fileObject = {
             name: path.basename(dir),
-            path:dir
+            path: dir
 
         };
 
