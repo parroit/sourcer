@@ -1,6 +1,6 @@
 var FolderView = require('./js/folder-view');
 var DocumentView = require('./js/document-view');
-var DocumentCtrl = require('../js/document-ctrl');
+var DocumentCtrl = require('./js/document-ctrl');
 var folderCtrl = require('./js/folder-ctrl');
 
 $(document).ready(function(){
@@ -10,7 +10,7 @@ $(document).ready(function(){
         mode: "text/javascript",
         matchBrackets: true
     });
-    var documentView = new DocumentView(editor);
+    var documentView = new DocumentView(editor,$("#editor-container").find("ul"),$);
 
     var $folder = $("#folder-tree");
     var folderView = new FolderView(folderCtrl, $folder,$,editor);

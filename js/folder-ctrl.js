@@ -4,17 +4,18 @@ var path = require('path');
 var events = require('events');
 
 function FolderCtrl() {
-    this.onFileAction = function(file){
-        this.events.emit('fileAction',file);
+    var self = this;
+    self.onFileAction = function(file){
+        self.events.emit('fileAction',file);
     };
 
-    this.onDirectoryAction = function(directory){
-        this.events.emit('directoryfileAction',directory);
+    self.onDirectoryAction = function(directory){
+        self.events.emit('directoryfileAction',directory);
     };
 
-    this.events = new events.EventEmitter();
-    _.bind(this.onFileAction,this);
-    _.bind(this.onDirectoryAction,this);
+    self.events = new events.EventEmitter();
+    _.bind(self.onFileAction,this);
+    _.bind(self.onDirectoryAction,this);
 
 }
 
