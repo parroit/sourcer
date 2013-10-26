@@ -61,7 +61,7 @@ DocumentCtrl.prototype.save = function(done){
     fs.writeFile(this.filepath,this.content, 'utf8', function (err) {
         if (err) throw err;
         self.setClean();
-        done();
+        done && done();
     });
 };
 

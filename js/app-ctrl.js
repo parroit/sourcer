@@ -25,6 +25,15 @@ AppCtrl.prototype.closeActiveDocument = function(){
 };
 
 
+AppCtrl.prototype.saveActiveDocument = function(){
+
+    var self = this;
+    if (self.activeDocument){
+        self.activeDocument.save();
+    }
+};
+
+
 AppCtrl.prototype.changeFolder = function(folderPath){
     var self = this;
     self.folderCtrl.changeFolder(folderPath,function(){
