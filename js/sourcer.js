@@ -2,17 +2,19 @@
 
 $(document).ready(function(){
     var FolderView = require('./js/folder-view');
-    var ctrl = require('./js/folder-ctrl');
+    var folderCtrl = require('./js/folder-ctrl');
 
     var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
         lineNumbers: true,
         mode: "text/javascript",
         matchBrackets: true
     });
-    var $folder = $("#folder-tree");
-    var view = new FolderView(ctrl, $folder,$,editor);
+    var DocumentCtrl = require();
 
-    ctrl.changeFolder(process.cwd(),function(){
+    var $folder = $("#folder-tree");
+    var view = new FolderView(folderCtrl, $folder,$,editor);
+
+    folderCtrl.changeFolder(process.cwd(),function(){
         CollapsibleLists.applyTo($folder[0]);
     });
 
