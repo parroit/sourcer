@@ -1,0 +1,50 @@
+{
+  "name": "sourcer",
+  "main": "index.html",
+  "description": "javascript IDE",
+  "version": "0.0.1",
+  "homepage": "https://github.com/parroit/sourcer",
+  "author": {
+    "name": "Andrea Parodi",
+    "email": "andrea.parodi@ebansoftware.net"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/parroit/sourcer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/parroit/sourcer/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/parroit/sourcer/blob/master/LICENSE-MIT"
+    }
+  ],
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-mocha-test": "~0.7.0",
+    "chai": "~1.8.0",
+    "sinon": "~1.7.3",
+    "sinon-chai": "~2.4.0"
+  },
+  "dependencies": {
+    "lodash": "~2.2.1",
+    "cheerio": "~0.12.3"
+  },
+  "keywords": [
+    "IDE",
+    "javascript",
+    "sublime",
+    "editor",
+    "text",
+    "node",
+    "webkit"
+  ]
+}
