@@ -24,6 +24,13 @@ function setupMenu() {
         }
     }));
 
+    file.append(new gui.MenuItem({
+        label: '&Close',
+        click: function() {
+            appCtrl.closeActiveDocument();
+        }
+    }));
+
     // You can have submenu!
     menubar.append(new gui.MenuItem({ label: '&File', submenu: file}));
 

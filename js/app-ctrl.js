@@ -16,6 +16,15 @@ function AppCtrl(CodeMirrorDoc){
 
 }
 
+AppCtrl.prototype.closeActiveDocument = function(){
+
+    var self = this;
+    if (self.activeDocument){
+        self.activeDocument.close();
+    }
+};
+
+
 AppCtrl.prototype.changeFolder = function(folderPath){
     var self = this;
     self.folderCtrl.changeFolder(folderPath,function(){
@@ -30,16 +39,26 @@ AppCtrl.prototype.openDocument= function(filepath) {
     } else {
         var documentCtrl = new DocumentCtrl(filepath,self.CodeMirrorDoc);
         documentCtrl.open(function() {
-            self.activeDocument = documentCtrl;
-            self.events.emit("documentOpened",documentCtrl);
+
             documentCtrl.events.once('documentClosed',function(){
                 var index = self.documentCtrls.indexOf(documentCtrl);
 
                 if (index > -1) {
                     self.documentCtrls.splice(index, 1);
                 }
+                console.log("CLOSING %s:active %s",documentCtrl.filepath,self.activeDocument.filepath);
+                if (documentCtrl.filepath == self.activeDocument.filepath){
+                    if (self.documentCtrls.length){
+                        self.activeDocument= self.documentCtrls[self.documentCtrls.length-1];
+                    } else
+                        self.activeDocument= undefined;
+                }
+
+
             });
             self.documentCtrls.push(documentCtrl);
+            self.activeDocument = documentCtrl;
+            self.events.emit("documentOpened",documentCtrl);
         });
     }
 };

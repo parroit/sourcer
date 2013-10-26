@@ -80,13 +80,53 @@ describe('AppCtrl', function () {
                 expect(appCtrl.activeDocument).to.be.equal(appCtrl.documentCtrls[0]);
             });
 
-            it("should remove document controller when closed", function () {
-                appCtrl.activeDocument.close();
-                expect(appCtrl.documentCtrls.length).to.be.equal(0);
+            describe("on document closing",function(){
+                before(function(done){
+                    appCtrl.events.once('documentOpened',function(){
+                        appCtrl.activeDocument.close();
+                        done();
+                    });
+                    appCtrl.openDocument("test-doc/doc1.txt");
+
+                });
+
+                it("should remove document controller when closed", function () {
+                    expect(appCtrl.documentCtrls.length).to.be.equal(1);
+                });
+
+                it("should change activeDocument if other documents remains", function () {
+                    expect(appCtrl.activeDocument.filepath).to.be.equal("test-doc/doc.txt");
+                    appCtrl.activeDocument.close();
+                });
+
+
+
+                it("should reset activeDocument if no document remain", function () {
+                    expect(appCtrl.activeDocument).to.be.undefined;
+                });
             });
+
         });
 
 
 
-    })
+    });
+
+    describe("closeActiveDocument",function(){
+        it("do nothing when activeDocument is faulsy",function(){
+            appCtrl.activeDocument=null;
+            appCtrl.closeActiveDocument();
+            expect(appCtrl.activeDocument).to.be.null;
+        });
+        it("call close on activeDocument",function(){
+            var called=false;
+            appCtrl.activeDocument={
+                close: function(){
+                    called=true;
+                }
+            };
+            appCtrl.closeActiveDocument();
+            expect(called).to.be.true;
+        });
+    });
 });
