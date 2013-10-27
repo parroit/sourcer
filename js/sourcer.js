@@ -54,9 +54,10 @@ var DocumentView = require('./js/document-view');
 
 $(document).ready(function () {
 
-    appCtrl.events.on("documentOpened", function (ctrl) {
+    appCtrl.events.on("activeDocumentChanged", function (ctrl) {
         documentView.setDocumentCtrl(ctrl);
     });
+
     appCtrl.events.on("saveConfirm", function (ctrl) {
         if (confirm("File " + ctrl.filepath + " has unsaved edits. Do you want to save the file?")) {
             ctrl.save(function () {

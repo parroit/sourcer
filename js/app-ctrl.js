@@ -8,11 +8,21 @@ function AppCtrl(CodeMirrorDoc){
     self.events= new events.EventEmitter();
     self.documentCtrls = [];
     self.folderCtrl = new FolderCtrl();
+    self.allDocumentsCtrls = {};
 
     self.folderCtrl.events.on('fileAction',function(file){
         self.openDocument(file.path);
     });
 
+    Object.defineProperty(this, "activeDocument", {
+        get: function() {
+            return this._activeDocument;
+        },
+        set: function(value) {
+            this._activeDocument = value;
+            this.events.emit('activeDocumentChanged');
+        }
+    });
 
 }
 
@@ -53,6 +63,7 @@ AppCtrl.prototype.openDocument= function(filepath) {
 
         if (index > -1) {
             self.documentCtrls.splice(index, 1);
+            delete self.allDocumentsCtrls[documentCtrl.filepath];
         }
         documentCtrl.events.removeListener('dirtyClosing', onDirtyClosing);
 
@@ -72,6 +83,7 @@ AppCtrl.prototype.openDocument= function(filepath) {
         documentCtrl.events.on('dirtyClosing', onDirtyClosing);
         documentCtrl.events.once('documentClosed', onDocumentClosed);
         self.documentCtrls.push(documentCtrl);
+        self.allDocumentsCtrls[documentCtrl.filepath] = documentCtrl;
         self.activeDocument = documentCtrl;
         self.events.emit("documentOpened", documentCtrl);
     }

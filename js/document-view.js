@@ -37,9 +37,8 @@ DocumentView.prototype.setDocumentCtrl = function(ctrl){
     var anchor;
     var tab;
     tab = $("#"+fileId);
-    if (tab.length){
-        self.anchor = tab.find("a");
-    }   else{
+
+    function createNewTab() {
         anchor = $("<a>");
 
         anchor.addClass("file-tab");
@@ -49,15 +48,20 @@ DocumentView.prototype.setDocumentCtrl = function(ctrl){
 
         tab = $("<li>");
 
-        tab.attr("id",fileId);
+        tab.attr("id", fileId);
 
-        tab.attr("data-uk-tooltip","{pos:'bottom-left'}");
+        tab.attr("data-uk-tooltip", "{pos:'bottom-left'}");
         tab.append(anchor);
         self.tabsElm.append(tab);
         tab = $("#" + tab.attr("id"));
         self.anchor = tab.find("a");
+    }
 
+    if (tab.length){
+        self.anchor = tab.find("a");
 
+    } else {
+        createNewTab();
     }
     self.tabsElm.find(".uk-tab-responsive").remove();
 
