@@ -54,8 +54,8 @@ var DocumentView = require('./js/document-view');
 
 $(document).ready(function () {
 
-    appCtrl.events.on("activeDocumentChanged", function (ctrl) {
-        documentView.setDocumentCtrl(ctrl);
+    appCtrl.events.on("activeDocumentChanged", function () {
+        documentView.setDocumentCtrl(appCtrl.activeDocument);
     });
 
     appCtrl.events.on("saveConfirm", function (ctrl) {
@@ -73,7 +73,7 @@ $(document).ready(function () {
         var chooser = $("#fileDialog");
         chooser.change(function (evt) {
             var filepath = $(this).val();
-            alert(filepath);
+
             appCtrl.openDocument(filepath);
         });
 
@@ -91,6 +91,10 @@ $(document).ready(function () {
     });
 
     var documentView = new DocumentView(editor, $("#editor-container").find("ul"), $);
+
+    documentView.events.on('requestDocumentActivation',function(filepath){
+        appCtrl.activeDocument = appCtrl.allDocumentsCtrls[filepath];
+    });
 
     var folderView = new FolderView(appCtrl.folderCtrl, $folder, $, editor);
 

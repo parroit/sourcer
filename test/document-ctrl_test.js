@@ -42,6 +42,12 @@ describe('DocumentCtrl', function () {
                 expect(ctrl.content).to.be.equal("this is a test");
 
             });
+
+            it("set document mimeType", function () {
+                expect(ctrl.mimeType).to.be.equal("text/plain");
+
+            });
+
             it("set document status opened", function () {
                 expect(ctrl.status).to.be.equal("open");
             });

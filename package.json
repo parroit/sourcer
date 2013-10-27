@@ -39,7 +39,8 @@
     "lodash": "~2.2.1",
     "cheerio": "~0.12.3",
     "node-uuid": "~1.4.1",
-    "codemirror": "~3.19.0"
+    "codemirror": "~3.19.0",
+    "mime": "~1.2.11"
   },
   "keywords": [
     "IDE",

@@ -2,6 +2,8 @@ var fs = require("fs");
 var path = require("path");
 var events = require("events");
 var _ = require("lodash");
+var mime = require('mime');
+
 
 function DocumentCtrl(filepath,CodeMirrorDoc){
     this.CodeMirrorDoc=CodeMirrorDoc;
@@ -46,7 +48,8 @@ DocumentCtrl.prototype.open = function(done){
     var self = this;
 
     fs.readFile(self.filepath, 'utf8', function (err, data) {
-        self.doc = new self.CodeMirrorDoc(data,"text/plain",0);
+        self.mimeType = mime.lookup(self.filepath);
+        self.doc = new self.CodeMirrorDoc(data,self.mimeType,0);
         self.doc.on('change',self.setDirty);
         self.status = status.opened;
         self.dirty = false;

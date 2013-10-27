@@ -3,8 +3,10 @@ var uuid = require('node-uuid');
 function DocumentView(editor, tabsElm, $){
     this.events = new events.EventEmitter();
     this.editor = editor;
+    this.emptyDoc = editor.getDoc();
     this.tabsElm=tabsElm;
     this.$=$;
+
 }
 
 module.exports = DocumentView;
@@ -23,51 +25,65 @@ DocumentView.prototype.setDocumentCtrl = function(ctrl){
     }
     self.ctrl = ctrl;
 
-
-    self.ctrl.events.on('captionChanged', onCaptionChanged);
-
-    self.editor.swapDoc(ctrl.doc);
-
-
+    if (self.ctrl){
+        self.ctrl.events.on('captionChanged', onCaptionChanged);
+        //self.editor.setOption("mode", ctrl.mimeType);
+        self.editor.swapDoc(ctrl.doc);
 
 
-    var fileId = ctrl.filepath.replace(/[\\\/ :.-_]/g, "X");
 
 
-    var anchor;
-    var tab;
-    tab = $("#"+fileId);
-
-    function createNewTab() {
-        anchor = $("<a>");
-
-        anchor.addClass("file-tab");
-        anchor.attr("href", "");
-        anchor.html(ctrl.caption);
+        var fileId = ctrl.filepath.replace(/[\\\/ :.-_]/g, "X");
 
 
-        tab = $("<li>");
+        var anchor;
+        var tab;
+        tab = $("#"+fileId);
 
-        tab.attr("id", fileId);
+        function createNewTab() {
+            anchor = $("<a>");
 
-        tab.attr("data-uk-tooltip", "{pos:'bottom-left'}");
-        tab.append(anchor);
-        self.tabsElm.append(tab);
-        tab = $("#" + tab.attr("id"));
-        self.anchor = tab.find("a");
-    }
+            anchor.addClass("file-tab");
+            anchor.attr("href", "");
+            anchor.attr("data-path", ctrl.filepath);
+            anchor.html(ctrl.caption);
+            anchor.click(function(){
+                $(this).attr("data-path");
+                self.events.emit('requestDocumentActivation',$(this).attr("data-path"));
+            });
 
-    if (tab.length){
-        self.anchor = tab.find("a");
+            tab = $("<li>");
 
+            tab.attr("id", fileId);
+
+            tab.attr("data-uk-tooltip", "{pos:'bottom-left'}");
+            tab.append(anchor);
+            self.tabsElm.append(tab);
+
+
+            ctrl.events.on('documentClosed',function(){
+                $("#" + tab.attr("id")).remove();
+
+            });
+
+            self.anchor = tab.find("a");
+
+            tab = $("#" + tab.attr("id"));
+        }
+
+        if (tab.length){
+            self.anchor = tab.find("a");
+
+        } else {
+            createNewTab();
+        }
+        self.tabsElm.find(".uk-tab-responsive").remove();
+
+        self.tabsElm.find("li")
+            .removeClass("uk-active");
+        tab.addClass("uk-active");
     } else {
-        createNewTab();
+        self.editor.swapDoc(self.emptyDoc);
     }
-    self.tabsElm.find(".uk-tab-responsive").remove();
-
-    self.tabsElm.find("li")
-        .removeClass("uk-active");
-    tab.addClass("uk-active");
-
 
 };
