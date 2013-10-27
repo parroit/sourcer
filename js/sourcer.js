@@ -52,6 +52,33 @@ var FolderView = require('./js/folder-view');
 var DocumentView = require('./js/document-view');
 
 
+function discoverModes() {
+    var fs = require("fs");
+    fs.readdir("./node_modules/codemirror/mode", function (err, list) {
+
+        var required = list.length - 3;
+        list.forEach(function (mode) {
+
+            CodeMirror.requireMode(mode, function () {
+                required--;
+                if (!required) {
+                    var results = {};
+                    for (var key in CodeMirror.mimeModes) {
+                        if (typeof  CodeMirror.mimeModes[key] === 'string')
+                            results[key] = CodeMirror.mimeModes[key];
+                        else
+                            results[key] = CodeMirror.mimeModes[key].name;
+                    }
+                    fs.writeFile("modes.json", JSON.stringify(results));
+                }
+            });
+
+
+        });
+
+
+    });
+}
 $(document).ready(function () {
 
     appCtrl.events.on("activeDocumentChanged", function () {
@@ -90,7 +117,7 @@ $(document).ready(function () {
         mode: "text/plain"
     });
 
-    var documentView = new DocumentView(editor, $("#editor-container").find("ul"), $);
+    var documentView = new DocumentView(editor, $("#editor-container").find("ul"), $,CodeMirror);
 
     documentView.events.on('requestDocumentActivation',function(filepath){
         appCtrl.activeDocument = appCtrl.allDocumentsCtrls[filepath];
@@ -102,6 +129,7 @@ $(document).ready(function () {
     $('body').split({orientation: 'vertical', limit: 100});
 
     setupMenu();
-
+    CodeMirror.modeURL = "./node_modules/codemirror/mode/%N/%N.js";
     appCtrl.changeFolder(process.cwd());
+    //discoverModes();
 });

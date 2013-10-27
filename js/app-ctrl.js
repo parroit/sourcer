@@ -1,7 +1,7 @@
 var events = require("events");
 var DocumentCtrl = require('./document-ctrl');
 var FolderCtrl = require('./folder-ctrl');
-
+var fs = require("fs");
 function AppCtrl(CodeMirrorDoc){
     var self = this;
     self.CodeMirrorDoc=CodeMirrorDoc;
@@ -9,6 +9,9 @@ function AppCtrl(CodeMirrorDoc){
     self.documentCtrls = [];
     self.folderCtrl = new FolderCtrl();
     self.allDocumentsCtrls = {};
+    var data = fs.readFileSync("config/modes.json",'utf8');
+    self.config = JSON.parse(data);
+
 
     self.folderCtrl.events.on('fileAction',function(file){
         self.openDocument(file.path);
@@ -93,7 +96,7 @@ AppCtrl.prototype.openDocument= function(filepath) {
     if (!filepath){
         self.events.emit("requireOpenFilePath");
     } else {
-        documentCtrl = new DocumentCtrl(filepath,self.CodeMirrorDoc);
+        documentCtrl = new DocumentCtrl(filepath,self.CodeMirrorDoc,self);
         documentCtrl.open(onDocumentOpened);
     }
 };

@@ -1,11 +1,12 @@
 var events = require("events");
 var uuid = require('node-uuid');
-function DocumentView(editor, tabsElm, $){
+function DocumentView(editor, tabsElm, $,CodeMirror){
     this.events = new events.EventEmitter();
     this.editor = editor;
     this.emptyDoc = editor.getDoc();
     this.tabsElm=tabsElm;
     this.$=$;
+    this.CodeMirror=CodeMirror;
 
 }
 
@@ -28,7 +29,11 @@ DocumentView.prototype.setDocumentCtrl = function(ctrl){
     if (self.ctrl){
         self.ctrl.events.on('captionChanged', onCaptionChanged);
         //self.editor.setOption("mode", ctrl.mimeType);
-        self.editor.swapDoc(ctrl.doc);
+
+        self.CodeMirror.requireMode(ctrl.mode, function(){
+            self.editor.swapDoc(ctrl.doc);
+        });
+
 
 
 

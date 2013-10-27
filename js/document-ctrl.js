@@ -5,13 +5,14 @@ var _ = require("lodash");
 var mime = require('mime');
 
 
-function DocumentCtrl(filepath,CodeMirrorDoc){
+function DocumentCtrl(filepath,CodeMirrorDoc,app){
     this.CodeMirrorDoc=CodeMirrorDoc;
     this.filepath = filepath;
     this.dirty = false;
     this.status = status.closed;
     this.events = new events.EventEmitter();
     this.setDirty = _.bind(this.setDirty,this);
+    this.app=app;
     Object.defineProperty(this, "content", {
         get: function() {
             return (this.doc && this.doc.getValue()) || undefined;
@@ -49,6 +50,7 @@ DocumentCtrl.prototype.open = function(done){
 
     fs.readFile(self.filepath, 'utf8', function (err, data) {
         self.mimeType = mime.lookup(self.filepath);
+        self.mode = self.app.config[self.mimeType];
         self.doc = new self.CodeMirrorDoc(data,self.mimeType,0);
         self.doc.on('change',self.setDirty);
         self.status = status.opened;

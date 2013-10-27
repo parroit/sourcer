@@ -17,7 +17,7 @@ describe('DocumentCtrl', function () {
         });
     });
     var documentPath = "test/test-doc/doc.txt";
-    var ctrl = new DocumentCtrl(documentPath,DocMock);
+    var ctrl = new DocumentCtrl(documentPath,DocMock,{config:{}});
     describe("Controller", function () {
 
         it("should set filepath", function () {
