@@ -40,7 +40,22 @@
     "text/x-jade": "jade",
     "text/javascript": "javascript",
     "text/ecmascript": "javascript",
-    "application/javascript": "javascript",
+    "application/javascript": {
+        "name":"javascript",
+        "extraKeys": {"Ctrl-Space": "autocomplete"},
+        "plugins":[
+            "node_modules/codemirror/addon/hint/show-hint.js",
+            "node_modules/codemirror/addon/hint/javascript-hint.js"
+        ],
+        "styles":[
+            "node_modules/codemirror/addon/hint/show-hint.css"
+        ]
+        ,
+        "extraCommands":{
+            "autocomplete" : "function(CodeMirror){return function(cm) {CodeMirror.showHint(cm, CodeMirror.hint.javascript)}}"
+
+        }
+    },
     "application/ecmascript": "javascript",
     "application/json": "javascript",
     "application/x-json": "javascript",
