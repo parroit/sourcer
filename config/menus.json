@@ -2,12 +2,12 @@
   {
     "label": "File",
     "sub": [
-      { "label": "New File", "command": "session:new-file" },
-      { "label": "Open File", "command": "session:open-file" },
-      { "label": "Save", "command": "session:save-file" },
-      { "label": "Save As", "command": "session:save-file-as" },
+      { "label": "New File", "command": "documents:newDoc" },
+      { "label": "Open File", "command": "documents:open" },
+      { "label": "Save", "command": "documents:save" },
+      { "label": "Save As", "command": "documents:saveAs" },
       { "label": "Revert", "command": "session:revert-file" },
-      { "label": "Close", "command": "session:close-tab" },
+      { "label": "Close", "command": "documents:close" },
       { "label": "Exit", "command": "app:exit" }
     ]
   },
