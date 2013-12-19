@@ -30,4 +30,13 @@
 
 
     });
+
+    var app = require("../../lib/app"),
+        gui = app.views.vendor.gui = require('nw.gui');
+
+    app.views.vendor.$ = $;
+    app.views.window = gui.Window.get();
+    app.init();
+
+
 })();

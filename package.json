@@ -28,10 +28,10 @@
     "test": "grunt"
   },
   "dependencies": {
-    "mime":"*",
-    "node-uuid":"*"
+    "mime": "*",
+    "node-uuid": "*",
+    "lodash": "~2.4.1"
   },
-
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-mocha-test": "~0.7.0",
