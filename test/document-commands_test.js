@@ -170,22 +170,70 @@ describe("documentCommands", function () {
             documents.save();
         },pathCopy);
 
-        documentsSaveTest("documents.save command",function open(filename){
+        documentsSaveTest("documents.save command on altPath",function open(filename){
             bogusApp.commands.run("documents:save",documents.active.id,pathSaveAs);
         },pathSaveAs,true);
 
-        documentsSaveTest("documents.save command on active document",function open(filename){
+        documentsSaveTest("documents.save command on active document  on altPath",function open(filename){
             bogusApp.commands.run("documents:save",undefined,pathSaveAs);
         },pathSaveAs,true);
 
-        documentsSaveTest("documents.save fn",function open(filename){
+        documentsSaveTest("documents.save fn  on altPath",function open(filename){
             documents.save(documents.active.id,pathSaveAs);
         },pathSaveAs,true);
 
-        documentsSaveTest("documents.save fn on active document",function open(filename){
+        documentsSaveTest("documents.save fn on active document on altPath",function open(filename){
             documents.save(undefined,pathSaveAs);
         },pathSaveAs,true);
 
+
+
+        documentsSaveAsTest("documents.saveas command",function open(filename){
+            bogusApp.commands.run("documents:saveAs",documents.active.id);
+        });
+
+        documentsSaveAsTest("documents.saveas command on active document",function open(filename){
+            bogusApp.commands.run("documents:saveAs");
+        });
+
+        documentsSaveAsTest("documents.saveas fn",function open(filename){
+            documents.saveAs(documents.active.id);
+        });
+
+        documentsSaveAsTest("documents.saveas fn on active document",function open(filename){
+            documents.saveAs();
+        });
+
+
+
+        function documentsSaveAsTest(label,saveFn) {
+            describe(label,function () {
+                var eventCalled = 0,
+                    id;
+                    
+                before(function (done) {
+                    bogusApp.events.once("saveFileDialogRequest",function(documentId){
+                        eventCalled++;
+                        id = documentId;
+                        done();
+                    });
+                    
+
+                    saveFn();
+                    
+                });
+
+                 it("saveFileDialogRequest event contains document id", function () {
+
+                    expect(id).to.be.equal(documents.active.id);
+
+                });
+
+                it("raise saveFileDialogRequest",function(){
+                    expect(eventCalled).to.be.equal(1);
+                });
+            });
+        }
 
         function documentsSaveTest(label,saveFn,expectedPath,altPath) {
             describe(label,function () {
@@ -286,6 +334,45 @@ describe("documentCommands", function () {
             });
 
             
+        }
+
+
+
+        function documentsNewTest(label,newFn) {
+            describe(label,function documentsOpenTest() {
+                var eventCalled = 0;
+
+                before(function (done) {
+                    
+                    
+                    bogusApp.events.once("activeDocumentChanged",function(){
+                        eventCalled++;
+                        done();
+                    });
+
+                    
+
+                    newFn();
+                    
+                });
+
+                it("emit activeDocumentChanged event", function () {
+                    expect(eventCalled).to.be.equal(1);    
+                });
+
+                it("set active to newly created doc", function () {
+                    expect(documents.active.content).to.be.equal("");    
+                }); 
+
+                it("document is open", function () {
+                    expect(documents.active.status).to.be.equal("open");    
+                }); 
+
+                it("document is clean", function () {
+                    expect(documents.active.dirty).to.be.equal(false);    
+                }); 
+
+            });
         }
 
 
@@ -549,5 +636,17 @@ describe("documentCommands", function () {
 
             
         }
+
+
+        
+        documentsNewTest("documents:newDoc command",function (){
+            bogusApp.commands.run("documents:newDoc");
+        });
+
+
+        documentsNewTest("documents.newDoc fn",function (){
+            documents.newDoc();
+        });
+
     });
 });
