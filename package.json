@@ -1,7 +1,7 @@
 {
   "name": "sourcer",
-  "main": "index.html",
-  "description": "javascript IDE",
+  "main": "core/view/index.html",
+  "description": "javascript sublime text clone",
   "version": "0.0.1",
   "homepage": "https://github.com/parroit/sourcer",
   "author": {
@@ -27,20 +27,16 @@
   "scripts": {
     "test": "grunt"
   },
+  "dependencies": {
+    "mime":"*",
+    "node-uuid":"*"
+  },
+
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-mocha-test": "~0.7.0",
-    "chai": "~1.8.0",
-    "sinon": "~1.7.3",
-    "sinon-chai": "~2.4.0",
-    "grunt-node-webkit-builder": "~0.1.11"
-  },
-  "dependencies": {
-    "lodash": "~2.2.1",
-    "cheerio": "~0.12.3",
-    "node-uuid": "~1.4.1",
-    "codemirror": "~3.19.0",
-    "mime": "~1.2.11"
+    "grunt-node-webkit-builder": "~0.1.11",
+    "expect.js": "~0.2.0"
   },
   "keywords": [
     "IDE",
