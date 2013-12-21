@@ -10,6 +10,12 @@ module.exports = function (grunt) {
                     reporter: 'spec'
                 },
                 src: ['test/**/*.js']
+            },
+            working: {
+                options: {
+                    reporter: 'spec'
+                },
+                src: ['test/layout-view_test.js']
             }
         }
     });
@@ -18,5 +24,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-mocha-test');
 
     grunt.registerTask('default', 'mochaTest');
+    grunt.registerTask('test-working', 'mochaTest:working');
 
 };

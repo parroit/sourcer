@@ -9,7 +9,7 @@ var expect = require("expect.js"),
 var bogusApp = {
 	commands: commands,
     events: new EventEmitter()
-}
+};
 
 describe("documentCommands", function () {
     var documents;
