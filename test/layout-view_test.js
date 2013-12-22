@@ -8,7 +8,10 @@ var expect = require("expect.js"),
 describe("LayoutView", function () {
     var $ = cheerio.load('<div id="holder"></div>'),
         styleSheets= [],
-        scripts = [];
+        view,
+        scripts = [],
+        layoutCalled= 0,
+        emitResize;
 
     $.getScript = function(scriptPath,onLoaded){
         scripts.push(scriptPath);
@@ -19,20 +22,22 @@ describe("LayoutView", function () {
         styleSheets.push(styleSheetPath);
     };
 
+
+    $("div").__proto__.layout = function(options){
+        layoutCalled++;
+        emitResize = options.onresize;
+    };
+
     it("is defined", function () {
         expect(LayoutView).to.be.an('function');
     });
 
     describe("constructor", function () {
-        var view,
-            raised =0;
-        before(function(done){
+
+        before(function(){
             view = new LayoutView($,"");
-            view.events.on("rendered",function(){
-                raised++;
-                done();
-            });
-            view.render("#holder");
+
+
         });
 
 
@@ -40,19 +45,51 @@ describe("LayoutView", function () {
             expect(view).to.be.an("object");
         });
 
-        it("raise events", function () {
-            expect(view.events).to.be.an("object");
-        });
 
-        it("rendered event raised on render", function () {
-            expect(raised).to.be.equal(1);
-        });
 
         it("save reference to $", function () {
             expect(view.$).to.be.equal($);
         });
 
-        it("render html", function () {
+    });
+
+    describe("render",function() {
+        var raised =0;
+        before(function(done){
+            view.events.on("rendered",function(){
+                raised++;
+                done();
+            });
+            view.render("#holder");
+        });
+        it("raise events", function () {
+            expect(view.events).to.be.an("object");
+        });
+
+        it("call layout", function () {
+            expect(layoutCalled).to.be.equal(1);
+        });
+
+        it("emit resized on layout resize", function (done) {
+            var raised = 0;
+
+            view.events.on("resized",function(){
+                raised++;
+                expect(raised).to.be.equal(1);
+                done();
+            });
+
+
+            emitResize();
+
+        });
+
+
+        it("rendered event raised on render", function () {
+            expect(raised).to.be.equal(1);
+        });
+
+        it("renders html", function () {
 
             var expected =
                 '<div id="holder">' +
@@ -75,6 +112,49 @@ describe("LayoutView", function () {
             expect(styleSheets.indexOf("vendor/css/layout-default-latest.css")).to.be.greaterThan(-1);
         });
 
+
+    });
+
+    describe("showView",function() {
+        var SubView = function(position){
+              this.render= function(){
+                  called++;
+                  return "sub-view-" + position
+              }
+            },
+            called = 0;
+
+        before(function(){
+            function addIn(position){
+                called=0;
+                view.showView(new SubView(position),LayoutView.position[position])
+            }
+            addIn(LayoutView.position.center);
+            addIn(LayoutView.position.north);
+            addIn(LayoutView.position.south);
+            addIn(LayoutView.position.east);
+            addIn(LayoutView.position.west);
+
+        });
+
+
+
+        function testAt(position){
+            it("call render", function () {
+                expect(called).to.be.equal(1);
+            });
+
+            it("add sub view html at " + position + " position", function () {
+
+                expect($(".ui-layout-"+position).html()).to.be.equal("sub-view-"+position);
+            });
+        }
+
+        testAt(LayoutView.position.center);
+        testAt(LayoutView.position.north);
+        testAt(LayoutView.position.south);
+        testAt(LayoutView.position.east);
+        testAt(LayoutView.position.west);
     });
 });
 
