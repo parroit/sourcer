@@ -1,15 +1,23 @@
-.ui-tabs .ui-tabs-nav {
+.tabs {
     border-bottom: 1px solid #dddddd;
     padding-left: 0;
+    margin: 0;
+
 }
-.ui-tabs .ui-tabs-nav li {
+.tabs li {
     border: 1px solid #dddddd;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom: none;
+    display: inline-block;
+    padding: 2px;
+    margin-right: 2px;
+    cursor: pointer;
+    position: relative;
+    bottom: -1px;
 }
 
-.ui-tabs .ui-tabs-nav li.ui-tabs-active {
+.tabs li.active {
 
     border-bottom: 1px solid white;
 }
@@ -21,39 +29,39 @@
 
 }
 
-.ui-tabs .ui-tabs-nav li a {
+.tabs li a {
     padding: 5px 5px 6px;
+
+}
+.tabs li a,.tabs li.active:hover a{
     color: #999999;
+
 }
 
-
-.ui-tabs .ui-tabs-nav li:hover a {
+.tabs li:hover a {
     color: #111111;
 }
 
 
-.ui-tabs .ui-tabs-nav li:hover{
+.tabs li:hover{
     background: #f0f0f0;
 }
 
-.ui-layout-center.ui-tabs {
+.tabs li.active:hover{
+    background: white;
+    cursor: default;
+}
+
+.ui-layout-center.tabs {
     padding: 5px;
 }
 
-.ui-tabs .ui-tabs-panel {
-    padding:5px;
-}
 
 
 
 #ace-editor {
     position: relative;
-   /* top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width:400px;
-    height:400px;*/
+
 
 }
 

@@ -28,6 +28,10 @@ describe("LayoutView", function () {
         emitResize = options.onresize;
     };
 
+    $("div").__proto__.ready = function(caller){
+        caller();
+    };
+
     it("is defined", function () {
         expect(LayoutView).to.be.an('function');
     });
