@@ -193,7 +193,7 @@ describe("documentCommands", function () {
 
 
 
-        documentsSaveAsTest("documents.saveas command",function open(filename){
+       /* documentsSaveAsTest("documents.saveas command",function open(filename){
             bogusApp.commands.run("documents:saveAs",documents.active.id);
         });
 
@@ -238,7 +238,7 @@ describe("documentCommands", function () {
                     expect(eventCalled).to.be.equal(1);
                 });
             });
-        }
+        }*/
 
         function documentsSaveTest(label,saveFn,expectedPath,altPath) {
             describe(label,function () {
@@ -316,14 +316,14 @@ describe("documentCommands", function () {
                 });
 
                 if (!altPath) {
-                    it("emit saveFileDialogRequest on falsy path", function (done) {
+                   /* it("emit saveFileDialogRequest on falsy path", function (done) {
                         bogusApp.events.once("saveFileDialogRequest",function(){
                             done();
                         });
 
                         documents.active.filepath = "";
                         saveFn();
-                    });
+                    });*/
 
                     it("emit error on unexistent path", function (done) {
                         bogusApp.events.once("error",function(error){
@@ -403,12 +403,12 @@ describe("documentCommands", function () {
                         done();
                     });
 
-                    bogusApp.events.once("openFileDialogRequest",function(){
+                    /*bogusApp.events.once("openFileDialogRequest",function(){
                         eventCalled++;
                         countWithoutFileName = documents.count
-                    });
+                    });*/
 
-                    openFn();
+                    //openFn();
                     openFn(documentPath);
             	});
 
@@ -431,14 +431,14 @@ describe("documentCommands", function () {
                     ).to.be.equal(documents.active);    
                 });
 
-                it("does not increment count when no parameter given", function () {
+                /*it("does not increment count when no parameter given", function () {
                     expect(countWithoutFileName).to.be.equal(0);    
                 }); 
 
                 it("emit openFileDialogRequest event when no parameter given", function () {
                     expect(eventCalled).to.be.equal(1);    
                 }); 
-
+*/
                 it("raise activeDocumentChanged", function () {
                     expect(active).not.to.be.equal(null);
                 });
