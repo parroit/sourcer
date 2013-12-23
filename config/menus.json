@@ -8,7 +8,8 @@
       { "label": "Save As", "command": "documents:saveAs" },
       { "label": "Revert", "command": "session:revert-file" },
       { "label": "Close", "command": "documents:close" },
-      { "label": "Exit", "command": "app:exit" }
+        "divider",
+       { "label": "Exit", "command": "app:exit" }
     ]
   },
   {
@@ -42,6 +43,7 @@
   {
     "label": "Tools",
     "sub": [
+      { "label": "Toggle full-screen", "command": "app:full-screen"},
       { "label": "Go To Anything", "command": "palette:open"},
       { "label": "Go To Line", "command": "palette:open", "argument": "line"},
       { "label": "Go To Search", "command": "palette:open", "argument": "search"},

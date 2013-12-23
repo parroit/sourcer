@@ -7,5 +7,6 @@
     {"keys":"ctrl + n",    "command":"documents:newDoc"},
     {"keys":"ctrl + F4",    "command":"documents:close"},
     {"keys":"ctrl + s",    "command":"documents:save"},
-    {"keys":"ctrl + alt +s",    "command":"documents:saveAs"}
+    {"keys":"ctrl + alt + s",    "command":"documents:saveAs"},
+    {"keys":"F11",    "command":"app:full-screen"}
 ]
