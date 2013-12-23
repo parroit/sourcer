@@ -8,7 +8,7 @@ var expect = require("expect.js"),
 var bogusApp = {
 	commands: commands,
     events: new EventEmitter()
-}
+};
 
 describe("viewsCommands", function () {
     var views;

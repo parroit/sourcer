@@ -30,7 +30,9 @@ describe("documentCommands", function () {
        	before(function () {
         	documents = documentCommands.enable(bogusApp);
     	});
-
+        after(function () {
+            commands.terminate();
+        });
        	it("register documents:open", function () {
         	expect("documents:open" in bogusApp.commands._test.commands)
         		.to.be.equal(true);
@@ -102,7 +104,7 @@ describe("documentCommands", function () {
             
         }
 
-
+        
 
         documentsSetCleanTest("documents.setClean fn",function open(filename){
             documents.setClean(documents.active.id);
@@ -394,7 +396,7 @@ describe("documentCommands", function () {
                     
                     bogusApp.events.once("activeDocumentChanged",function(){
                         active = documents.active;
-                        
+
                         done();
                     });
 
@@ -473,7 +475,69 @@ describe("documentCommands", function () {
                 });
             });
         }
+        documentsActivateTest("documents.activate command",function activate(id){
+            bogusApp.commands.run("documents:activate",id);
+        });
 
+        documentsActivateTest("documents.activate fn",function activate(id){
+            documents.activate(id);
+        });
+
+        function documentsActivateTest(label,activateFn) {
+            describe(label,function documentsOpenTest() {
+                var eventCalled = 0;
+                var firstDocId,secondDocId;
+
+                before(function (done) {
+                    bogusApp.events.once("activeDocumentChanged",function(){
+                        firstDocId = documents.active.id;
+
+                        bogusApp.events.once("activeDocumentChanged",function(){
+                            secondDocId=documents.active.id;
+                            bogusApp.events.once("activeDocumentChanged",function(){
+                                eventCalled++;
+                                done();
+                            });
+                            activateFn(firstDocId);
+                        });
+
+                        documents.open("test/test-data/file2.txt");
+                    });
+                    documents.open("test/test-data/file1.txt");
+
+
+                });
+                after(function(done){
+                    var toClose = 2;
+                    var closeIt = function () {
+                        toClose--;
+                        if (toClose == 0)
+                        {
+                            done();
+                            bogusApp.events.removeListener("documentClosed", closeIt);
+                        }
+                    };
+                    bogusApp.events.on("documentClosed", closeIt);
+                   // console.log(firstDocId,secondDocId);
+                    documents.close(firstDocId);
+                    documents.close(secondDocId);
+                });
+
+                it("set active document", function () {
+
+                    expect(documents.active.id).to.be.equal(firstDocId);
+
+                });
+
+                it("raise activeDocumentChanged", function () {
+
+                    expect(eventCalled).to.be.equal(1);
+
+                });
+            });
+
+
+        }
 
 
 
@@ -647,6 +711,8 @@ describe("documentCommands", function () {
         documentsNewTest("documents.newDoc fn",function (){
             documents.newDoc();
         });
+
+
 
     });
 });

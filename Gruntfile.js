@@ -15,7 +15,7 @@ module.exports = function (grunt) {
                 options: {
                     reporter: 'spec'
                 },
-                src: ['test/documents-view_test.js']
+                src: ['test/documents-tabs_test.js']
             }
         }
     });
