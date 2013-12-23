@@ -2,15 +2,17 @@
 
 var expect = require("expect.js"),
     documentTabs = require("../lib/documents-tabs"),
-    app;
+    documents = require("../lib/document-commands"),
+    app = require("../lib/app");
 
 
 describe("documentTabs", function () {
     var doc1,doc2;
     before(function(){
-        app = require("../lib/app");
+        app.documents = documents.enable(app);
         documentTabs.enable(app);
         app.events.on("error",function(err){
+            console.log(err);
             throw err;
         })
 
@@ -23,14 +25,16 @@ describe("documentTabs", function () {
     it("is defined", function () {
         expect(documentTabs).to.be.an('array');
     });
+
     describe("on document open",function(){
         before(function(done){
 
-            app.events.once("activeDocumentChanged",function(){
+            app.events.once("activeDocumentChanged",function onOp(){
 
-                doc1=app.documents.active.id;
+                doc1 = app.documents.active.id;
                 done();
             });
+
             app.documents.open("test/test-data/file1.txt");
         });
 

@@ -9,6 +9,12 @@ describe("commands", function () {
     				commands._test &&
     				commands._test.commands;
 
+
+
+    after(function(){
+        commands.terminate();
+    });
+
     it("is defined", function () {
         expect(commands).to.be.an('object');
     });

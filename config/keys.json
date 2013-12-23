@@ -1,37 +1,11 @@
-{
-  //basic navigation/application keys
-  "Ctrl-O": "session:open-file",
-  "Ctrl-W": "session:close-tab",
-  "Ctrl-S": "session:save-file",
-  "Ctrl-Shift-S": "session:save-file-as",
-  "Ctrl-N": "session:new-file",
-  "Ctrl-Tab": "session:change-tab",
-  "Ctrl-Shift-Tab": { "command": "session:change-tab", "argument": -1 },
-  
-  //Chromebook fixes
-  "Ctrl-Up": { "ace": "addCursorAbove" },
-  "Ctrl-Down": { "ace": "addCursorBelow" },
-  "Alt-PageDown": { "command": "ace:command", "argument": "gotopagedown" },
-  "PageDown": { "command": "ace:command", "argument": "gotopagedown" },
-  "Alt-PageUp": { "command": "ace:command", "argument": "gotopageup" },
-  "PageUp": {"command": "ace:command", "argument": "gotopageup" },
-  "Alt-Home": { "command": "ace:command", "argument": "gotolinestart" },
-  "Home": { "command": "ace:command", "argument": "gotolinestart" },
-  "Alt-End": { "command": "ace:command", "argument": "gotolineend" },
-  "End": { "command": "ace:command", "argument": "gotolineend" },
-  
-  //Sublime compatibility
-  "Ctrl-L": "sublime:expand-to-line",
-  "Ctrl-D": { "ace": "selectMoreAfter" },
-  "Ctrl-P": { "command": "palette:open" },
-  "Ctrl-Shift-P": { "command": "palette:open", "argument": "command" },
-  "Ctrl-R": { "command": "palette:open", "argument": "reference" },
-  "Ctrl-G": { "command": "palette:open", "argument": "line" },
-  "Ctrl-M": { "ace": "jumptomatching" },
-  "Ctrl-Shift-M": { "command": "sublime:expand-to-matching" },
-  "Ctrl-Q": { "command": "ace:togglemacro" },
-  "Ctrl-Shift-Q": { "ace": "replaymacro" },
-  "Ctrl--": { "command": "editor:adjust-zoom", "argument": -1 },
-  "Ctrl-=": { "command": "editor:adjust-zoom", "argument": 1 },
-  "Ctrl-0": { "command": "editor:default-zoom" }
-}
+[
+    {"keys":"ctrl + z",    "command":"ace:undo"},
+    {"keys":"ctrl + shift + z",    "command":"ace:redo"},
+    {"keys":"ctrl + a",    "command":"ace:selectall"},
+    {"keys":"ctrl + g",    "command":"ace:gotoline"},
+    {"keys":"ctrl + o",    "command":"documents:open"},
+    {"keys":"ctrl + n",    "command":"documents:newDoc"},
+    {"keys":"ctrl + F4",    "command":"documents:close"},
+    {"keys":"ctrl + s",    "command":"documents:save"},
+    {"keys":"ctrl + alt +s",    "command":"documents:saveAs"}
+]

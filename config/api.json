@@ -1,8 +1,0 @@
-{
-  "sampleMessage": {
-    "id": "extension id goes here",
-    "message": {
-      "data": "message can be any JSON object passable to chrome.runtime.sendMessageExternal"
-    }
-  }
-}

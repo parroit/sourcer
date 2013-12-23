@@ -13,6 +13,9 @@ var bogusApp = {
 
 describe("documentCommands", function () {
     var documents;
+    after(function(){
+        commands.terminate();
+    });
 
     it("is defined", function () {
         expect(documentCommands).to.be.an('object');

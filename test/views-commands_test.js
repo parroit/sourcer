@@ -12,6 +12,9 @@ var bogusApp = {
 
 describe("viewsCommands", function () {
     var views;
+    after(function(){
+        commands.terminate();
+    });
 
     it("is defined", function () {
         expect(viewsCommands).to.be.an('object');

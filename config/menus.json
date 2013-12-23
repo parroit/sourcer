@@ -14,29 +14,29 @@
   {
     "label": "Edit",
     "sub": [
-      { "label": "Undo", "command": "ace:command", "argument": "undo" },
-      { "label": "Redo", "command": "ace:command", "argument": "redo" },
+      { "label": "Undo", "command": "ace:undo" },
+      { "label": "Redo", "command": "ace:redo" },
       "divider",
-      { "label": "Select Word", "command": "ace:command", "argument": "selectMoreAfter" },
+      { "label": "Select Word", "command": "ace:selectMoreAfter" },
       { "label": "Select Line", "command": "sublime:expand-to-line" },
       { "label": "Select Paragraph", "command": "sublime:expand-to-paragraph" },
       { "label": "Select to Matching", "command": "sublime:expand-to-matching" },
       "divider",
-      { "label": "Find", "command": "ace:command", "argument": "find" },
-      { "label": "Find/Replace", "command": "ace:command", "argument": "replace" },
-      { "label": "Find Next", "command": "ace:command", "argument": "findnext" },
+      { "label": "Find", "command": "ace:find" },
+      { "label": "Find/Replace", "command": "ace:replace" },
+      { "label": "Find Next", "command": "ace:findnext" },
       "divider",
-      { "label": "Toggle Comment", "command": "ace:command", "argument": "togglecomment" },
-      { "label": "Block Comment", "command": "ace:command", "argument": "toggleBlockComment" },
+      { "label": "Toggle Comment", "command": "ace:togglecomment" },
+      { "label": "Block Comment", "command": "ace:toggleBlockComment" },
       { "label": "Convert Tabs to Spaces", "command": "sublime:tabs-to-spaces" },
       { "label": "Convert Spaces to Tabs", "command": "sublime:spaces-to-tabs" },
       "divider",
-      { "label": "Sort Lines", "command": "ace:command", "argument": "sortlines" },
-      { "label": "Split Line", "command": "ace:command", "argument": "splitline" },
-      { "label": "To Uppercase", "command": "ace:command", "argument": "touppercase" },
-      { "label": "To Lowercase", "command": "ace:command", "argument": "tolowercase" },
-      { "label": "Move Lines Up", "command": "ace:command", "argument": "movelinesup" },
-      { "label": "Move Lines Down", "command": "ace:command", "argument": "movelinesdown" }
+      { "label": "Sort Lines", "command": "ace:sortlines" },
+      { "label": "Split Line", "command": "ace:splitline" },
+      { "label": "To Uppercase", "command": "ace:touppercase" },
+      { "label": "To Lowercase", "command": "ace:tolowercase" },
+      { "label": "Move Lines Up", "command": "ace:movelinesup" },
+      { "label": "Move Lines Down", "command": "ace:movelinesdown" }
     ]
   },
   {
@@ -49,7 +49,7 @@
       { "label": "Command Palette", "command": "palette:open", "argument": "command", "retainFocus": true },
       "divider",
       { "label": "Toggle Macro Recording", "command": "ace:togglemacro" },
-      { "label": "Replay Macro", "command": "ace:command", "argument": "replaymacro" }
+      { "label": "Replay Macro", "command": "ace:replaymacro" }
     ]
   },
   {
