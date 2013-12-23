@@ -1,55 +1,60 @@
 {
-  "name": "sourcer",
-  "main": "core/view/index.html",
-  "description": "javascript sublime text clone",
-  "version": "0.0.1",
-  "homepage": "https://github.com/parroit/sourcer",
-  "author": {
-    "name": "Andrea Parodi",
-    "email": "andrea.parodi@ebansoftware.net"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/parroit/sourcer.git"
-  },
-  "bugs": {
-    "url": "https://github.com/parroit/sourcer/issues"
-  },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://github.com/parroit/sourcer/blob/master/LICENSE-MIT"
+    "name": "sourcer",
+    "main": "core/view/index.html",
+    "description": "javascript sublime text clone",
+    "version": "0.0.1",
+    "homepage": "https://github.com/parroit/sourcer",
+    "author": {
+        "name": "Andrea Parodi",
+        "email": "andrea.parodi@ebansoftware.net"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/parroit/sourcer.git"
+    },
+    "bugs": {
+        "url": "https://github.com/parroit/sourcer/issues"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "https://github.com/parroit/sourcer/blob/master/LICENSE-MIT"
+        }
+    ],
+    "engines": {
+        "node": ">= 0.10.0"
+    },
+    "scripts": {
+        "test": "grunt"
+    },
+    "dependencies": {
+        "mime": "*",
+        "node-uuid": "*",
+        "lodash": "~2.4.1",
+        "include-folder": "~0.5.0",
+        "tabs-mvp": ">0.2.0",
+        "simplator": ">=0.0.5",
+        "bind-key": "0.0.0"
+    },
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-mocha-test": "~0.7.0",
+        "grunt-node-webkit-builder": "~0.1.11",
+        "expect.js": "~0.2.0",
+        "cheerio": "~0.12.4"
+    },
+    "keywords": [
+        "IDE",
+        "javascript",
+        "sublime",
+        "editor",
+        "text",
+        "node",
+        "webkit"
+    ],
+    "window": {
+        "title":"Sourcer ver.0.0.1",
+        "icon":"core/view/img/sourcer.png",
+        "toolbar":false
     }
-  ],
-  "engines": {
-    "node": ">= 0.10.0"
-  },
-  "scripts": {
-    "test": "grunt"
-  },
-  "dependencies": {
-    "mime": "*",
-    "node-uuid": "*",
-    "lodash": "~2.4.1",
-    "include-folder": "~0.5.0",
-    "tabs-mvp": ">0.2.0",
-    "simplator": ">=0.0.5",
-    "bind-key": "0.0.0"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-mocha-test": "~0.7.0",
-    "grunt-node-webkit-builder": "~0.1.11",
-    "expect.js": "~0.2.0",
-    "cheerio": "~0.12.4"
-  },
-  "keywords": [
-    "IDE",
-    "javascript",
-    "sublime",
-    "editor",
-    "text",
-    "node",
-    "webkit"
-  ]
 }
