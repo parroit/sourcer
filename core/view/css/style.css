@@ -1,11 +1,9 @@
 .tabs {
-    border-bottom: 1px solid #dddddd;
     padding-left: 0;
     margin: 0;
 
 }
 .tabs li {
-    border: 1px solid #dddddd;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom: none;
@@ -14,16 +12,12 @@
     margin-right: 2px;
     cursor: pointer;
     position: relative;
-    bottom: -1px;
+    bottom: -2px;
+    box-shadow: 1px 1px 10px #111111;
 }
 
-.tabs li.active {
-
-    border-bottom: 1px solid white;
-}
 
 .ui-layout-content {
-    border: 1px solid #dddddd;
     border-top: none;
     padding: 0;
 
@@ -44,7 +38,7 @@
 
 
 .tabs li:hover{
-    background: #f0f0f0;
+    background: #808080;
 }
 
 .tabs li.active:hover{
@@ -65,3 +59,35 @@
 
 }
 
+.ui-layout-pane {
+    background: #333;
+    border: 1px solid #262626;
+}
+
+.ui-layout-resizer {
+    background: #444;
+}
+
+.ui-layout-center {
+    border: none;
+}
+
+.ui-layout-content {
+    border: 1px solid #3a3a3a;
+    box-shadow: 1px 1px 10px #111111;
+}
+
+.tabs {
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.tabs li {
+    border: 1px solid #3a3a3a;
+    background: #272822;
+}
+
+
+.tabs li.active {
+    z-index: 1;
+    border-bottom: 1px solid #272822;
+}
