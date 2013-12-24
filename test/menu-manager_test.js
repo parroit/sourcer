@@ -57,7 +57,7 @@ describe("menu-manager", function () {
 		bogusApp.events.once("menuLoaded",function(){
 			var expected = '{"sub":[{"sub":[{"label":"open"},{"label":"close"}],"label":"File1"},{"sub":[{"label":"open1"},{"label":"close1"}],"label":"File2"}]}'
 		
-			expect(menuMock.render()).to.be.equal(expected);
+			expect(menuMock.render().replace(/ /g,"")).to.be.equal(expected.replace(/ /g,""));
 			done();
 		});
 
