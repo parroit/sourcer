@@ -73,7 +73,7 @@
     "label": "Settings",
     "sub": [
       { "label": "User Preferences", "command": "session:open-settings-file", "argument": "user" },
-      { "label": "Keyboard", "command": "session:open-settings-file", "argument": "keys" },
+      { "label": "Keyboard", "command": "config:open-keys-settings-file"},
       { "label": "Menus", "command": "session:open-settings-file", "argument": "menus" },
       { "label": "External Commands", "command": "session:open-settings-file", "argument": "api" },
       "divider",
