@@ -64,7 +64,7 @@
       { "label": "Refresh Directory", "command": "project:refresh-dir" },
       "divider",
       { "label": "Save Project File", "command": "project:generate" },
-      { "label": "Edit Current Project File", "command": "project:edit" },
+      { "label": "Edit Current Project File", "command": "project:show" },
       { "label": "Open Project File", "command": "project:open" },
       { "label": "Clear Project", "command": "project:clear" }
     ]
