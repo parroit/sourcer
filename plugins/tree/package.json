@@ -1,0 +1,13 @@
+{
+    "name": "aa",
+    "version": "0.0.0",
+    "description": "test plugin",
+    "dependecies":{
+        "plugit":"0.0.0"
+    },
+    "main": "./index",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/parroit/plugit.git"
+    }
+}
