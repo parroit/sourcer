@@ -35,7 +35,10 @@
     "tabs-mvp": ">0.2.0",
     "simplator": ">=0.0.5",
     "bind-key": "0.0.0",
-    "pad": "0.0.4"
+    "pad": "0.0.4",
+    "telescope": "~0.2.0",
+    "lru-cache": "~2.5.0",
+    "moment": "~2.5.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

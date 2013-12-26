@@ -13,7 +13,7 @@
     cursor: pointer;
     position: relative;
     bottom: -2px;
-    box-shadow: 1px 1px 10px #111111;
+
 }
 
 
@@ -84,6 +84,7 @@
 .tabs li {
     border: 1px solid #3a3a3a;
     background: #272822;
+    box-shadow: 2px -2px 0px rgba(40,40,40,0.6),-2px -2px 0px rgba(40,40,40,0.6);
 }
 
 
@@ -91,3 +92,4 @@
     z-index: 1;
     border-bottom: 1px solid #272822;
 }
+

@@ -4,6 +4,7 @@
     "sub": [
       { "label": "New File", "command": "documents:newDoc" },
       { "label": "Open File", "command": "documents:open" },
+        { "label": "Open Recent", "command": "menu:dynamic-sub","dynamicSub":"documents:lruFiles" },
       { "label": "Save", "command": "documents:save" },
       { "label": "Save As", "command": "documents:saveAs" },
       { "label": "Revert", "command": "session:revert-file" },
