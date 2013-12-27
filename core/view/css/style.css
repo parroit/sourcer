@@ -93,3 +93,11 @@
     border-bottom: 1px solid #272822;
 }
 
+.tree {
+    background: #272822;
+    box-shadow: 1px 1px 10px #111111;
+}
+
+.fancytree-container:focus {
+    outline: none;
+}

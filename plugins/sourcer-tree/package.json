@@ -1,0 +1,13 @@
+{
+    "name": "sourcer-tree",
+    "version": "0.0.0",
+    "description": "sourcer plugin that provides a treeview",
+    "dependecies":{
+        "plugit":"0.0.0"
+    },
+    "main": "./index",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/parroit/sourcer-tree.git"
+    }
+}
