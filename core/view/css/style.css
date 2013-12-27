@@ -96,6 +96,7 @@
 .tree {
     background: #272822;
     box-shadow: 1px 1px 10px #111111;
+    color:#dddddd;
 }
 
 .fancytree-container:focus {
